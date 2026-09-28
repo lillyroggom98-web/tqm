@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Un besito en la mejilla</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky-top: #f9d9e6;
+    --sky-bottom: #d5f0e4;
+    --water: #9fd8cf;
+    --pad: #5fb36b;
+    --ink: #2f4a3c;
+    --pink: #ff7fa7;
+    box-sizing: border-box;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1.25rem; padding: 1.5rem;
+    background: linear-gradient(180deg, var(--sky-top), var(--sky-bottom));
+    color: var(--ink);
+    font-family: "Baloo 2", ui-rounded, "Trebuchet MS", system-ui, sans-serif;
+  }
+  h1 { margin: 0; font-size: clamp(1.9rem, 6vw, 3rem); font-weight: 700; text-align: center; line-height: 1.1; }
+  svg { width: min(100%, 560px); height: auto; overflow: visible; }
+  button {
+    font: inherit; font-weight: 700; font-size: 1.05rem;
+    color: #fff; background: var(--pink);
+    border: 0; border-radius: 999px; padding: .55rem 1.6rem; cursor: pointer;
+    box-shadow: 0 4px 0 #d95c86;
+  }
+  button:active { transform: translateY(3px); box-shadow: 0 1px 0 #d95c86; }
+  button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+  .a { transform: translate(75px, 0) rotate(10deg); }
+  .a-smile { opacity: 0; }
+  .a-pucker { opacity: 1; }
+  .b-open { opacity: 0; }
+  .b-closed { opacity: 1; }
+  .b-blush { opacity: 1; }
+  .heart { opacity: 0; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .go .a        { animation: lean 6s ease-in-out infinite; }
+    .go .b        { animation: shy 6s ease-in-out infinite; }
+    .go .a-smile  { animation: smile 6s steps(1) infinite; }
+    .go .a-pucker { animation: pucker 6s steps(1) infinite; }
+    .go .b-open   { animation: open 6s steps(1) infinite; }
+    .go .b-closed { animation: closed 6s steps(1) infinite; }
+    .go .b-blush  { animation: blush 6s ease-in-out infinite; }
+    .go .heart    { animation: float 6s ease-out infinite; animation-delay: var(--d); }
+    .go .ripple   { animation: ripple 3s ease-in-out infinite; }
+  }
+
+  @keyframes lean {
+    0%, 30%   { transform: translate(0, 0) rotate(0deg); }
+    42%, 62%  { transform: translate(75px, 0) rotate(10deg); }
+    75%, 100% { transform: translate(0, 0) rotate(0deg); }
+  }
+  @keyframes shy {
+    0%, 40%   { transform: rotate(0deg) translateY(0); }
+    46%       { transform: rotate(-4deg) translateY(-5px); }
+    60%       { transform: rotate(-4deg) translateY(0); }
+    70%, 100% { transform: rotate(0deg) translateY(0); }
+  }
+  @keyframes smile  { 0%, 41.9% { opacity: 1; } 42%, 62% { opacity: 0; } 62.1%, 100% { opacity: 1; } }
+  @keyframes pucker { 0%, 41.9% { opacity: 0; } 42%, 62% { opacity: 1; } 62.1%, 100% { opacity: 0; } }
+  @keyframes open   { 0%, 43.9% { opacity: 1; } 44%, 64% { opacity: 0; } 64.1%, 100% { opacity: 1; } }
+  @keyframes closed { 0%, 43.9% { opacity: 0; } 44%, 64% { opacity: 1; } 64.1%, 100% { opacity: 0; } }
+  @keyframes blush  { 0%, 40% { opacity: .35; } 48%, 62% { opacity: 1; } 80%, 100% { opacity: .35; } }
+  @keyframes float {
+    0%, 44%   { opacity: 0; transform: translate(0, 0) scale(.5); }
+    48%       { opacity: 1; transform: translate(0, -8px) scale(1); }
+    78%, 100% { opacity: 0; transform: translate(var(--dx), -85px) scale(1.1); }
+  }
+  @keyframes ripple { 0%, 100% { transform: scale(1); opacity: .5; } 50% { transform: scale(1.06); opacity: .8; } }
+</style>
+</head>
+<body>
+  <h1>Un besito en la mejilla</h1>
+
+  <svg id="scene" class="go" viewBox="0 0 400 290" role="img"
+       aria-label="Una ranita verde le da un beso en la mejilla a otra ranita que sonríe con las mejillas sonrojadas">
+    <defs>
+      <g id="frog-body">
+        <ellipse cx="-30" cy="88" rx="17" ry="8" fill="var(--skin)"/>
+        <ellipse cx="30" cy="88" rx="17" ry="8" fill="var(--skin)"/>
+        <ellipse cx="0" cy="54" rx="38" ry="38" fill="var(--skin)"/>
+        <ellipse cx="0" cy="60" rx="24" ry="27" fill="var(--belly)"/>
+        <ellipse cx="-40" cy="62" rx="8" ry="13" fill="var(--skin)" transform="rotate(12 -40 62)"/>
+        <ellipse cx="40" cy="62" rx="8" ry="13" fill="var(--skin)" transform="rotate(-12 40 62)"/>
+        <circle cx="-26" cy="-26" r="16" fill="var(--skin)"/>
+        <circle cx="26" cy="-26" r="16" fill="var(--skin)"/>
+        <ellipse cx="0" cy="0" rx="46" ry="34" fill="var(--skin)"/>
+      </g>
+      <path id="heart-shape" d="M0 6 C-12 -4 -9 -15 0 -9 C9 -15 12 -4 0 6Z"/>
+    </defs>
+
+  
+    <ellipse cx="200" cy="262" rx="190" ry="22" fill="var(--water)" opacity=".55"/>
+    <ellipse class="ripple" cx="200" cy="262" rx="150" ry="15" fill="none" stroke="#fff" stroke-width="3" opacity=".5" style="transform-origin:200px 262px"/>
+    <ellipse cx="200" cy="258" rx="150" ry="19" fill="var(--pad)"/>
+    <ellipse cx="200" cy="255" rx="140" ry="14" fill="#74c67f"/>
+
+    
+    <g transform="translate(280 168)">
+      <g class="b" style="--skin:#a6e08f;--belly:#fff3b8">
+        <use href="#frog-body"/>
+        <g class="b-open">
+          <circle cx="-26" cy="-27" r="10" fill="#fff"/><circle cx="26" cy="-27" r="10" fill="#fff"/>
+          <circle cx="-24" cy="-26" r="5.5" fill="#2f4a3c"/><circle cx="28" cy="-26" r="5.5" fill="#2f4a3c"/>
+          <circle cx="-22.5" cy="-28" r="1.8" fill="#fff"/><circle cx="29.5" cy="-28" r="1.8" fill="#fff"/>
+          <path d="M-9 12 q9 7 18 0" fill="none" stroke="#2f4a3c" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <g class="b-closed">
+          <path d="M-35 -24 q9 -10 18 0 M17 -24 q9 -10 18 0" fill="none" stroke="#2f4a3c" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M-9 11 q9 9 18 0" fill="none" stroke="#2f4a3c" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <g class="b-blush" style="opacity:.35">
+          <ellipse cx="-30" cy="12" rx="10" ry="6.5" fill="#ff8fb1"/>
+          <ellipse cx="30" cy="12" rx="10" ry="6.5" fill="#ff8fb1"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- ranita A (da el beso) -->
+    <g transform="translate(120 168)">
+      <g class="a" style="--skin:#6fca62;--belly:#e6f7c4">
+        <use href="#frog-body"/>
+        <path d="M-35 -24 q9 -10 18 0 M17 -24 q9 -10 18 0" fill="none" stroke="#2f4a3c" stroke-width="3.5" stroke-linecap="round"/>
+        <ellipse cx="-30" cy="12" rx="10" ry="6.5" fill="#ff8fb1" opacity=".6"/>
+        <ellipse cx="28" cy="10" rx="9" ry="6" fill="#ff8fb1" opacity=".6"/>
+        <path class="a-smile" d="M-9 12 q9 7 18 0" fill="none" stroke="#2f4a3c" stroke-width="3" stroke-linecap="round"/>
+        <g class="a-pucker">
+          <ellipse cx="41" cy="9" rx="8" ry="6.5" fill="#ff5f92"/>
+          <path d="M34 9 h14" stroke="#c93d6c" stroke-width="1.6" stroke-linecap="round"/>
+        </g>
+      </g>
+    </g>
+
+    <g transform="translate(238 150)"><use class="heart" href="#heart-shape" fill="#ff5f92" style="--d:0s;--dx:-8px"/></g>
+    <g transform="translate(246 148)"><use class="heart" href="#heart-shape" fill="#ff8fb1" style="--d:.25s;--dx:14px"/></g>
+    <g transform="translate(232 152)"><use class="heart" href="#heart-shape" fill="#ffb3cb" style="--d:.5s;--dx:-22px"/></g>
+  </svg>
+
+  <button id="again" type="button">Otro besito</button>
+
+<script>
+  
+  var scene = document.getElementById('scene');
+  document.getElementById('again').addEventListener('click', function () {
+    scene.classList.remove('go');
+    void scene.getBoundingClientRect();
+    scene.classList.add('go');
+  });
+</script>
+</body>
+</html>
